@@ -1,0 +1,13 @@
+name: Default
+description: Immich with its own bundled Postgres and Redis — everything in one stack
+usage: |
+  Open the published port in your browser to create the first (admin)
+  account — Immich has no default credentials, the first account you create
+  becomes the admin.
+
+  Point the Immich mobile app at this server's URL and log in with that
+  account to start backing up photos and videos.
+
+  immich-machine-learning handles face recognition, object detection, and
+  CLIP search in the background — expect the first import of a large library
+  to take a while as it catches up.

@@ -1,0 +1,14 @@
+name: With External Postgres
+description: Connects to a Postgres instance you already run instead of bundling one
+usage: |
+  This variant has no database service — set DB_HOSTNAME, DB_PORT,
+  DB_USERNAME, DB_PASSWORD, and DB_DATABASE_NAME in .env to point at your
+  existing Postgres instance before deploying.
+
+  That instance must have the vectorchord (or pgvecto.rs) extension
+  available — a stock Postgres image will not work. The easiest way to get
+  this is to run ghcr.io/immich-app/postgres yourself and point this variant
+  at it, rather than at a general-purpose Postgres you use for other apps.
+
+  Open the published port in your browser to create the first (admin)
+  account once the stack is up.

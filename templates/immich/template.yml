@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Immich
+description: A self-hosted photo and video backup solution with mobile apps
+category: Media
+icon: icon.svg

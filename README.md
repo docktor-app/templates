@@ -82,3 +82,4 @@ for the full format reference, size limits, and rejection rules.
 | Template | Variants |
 |---|---|
 | [`nextcloud`](templates/nextcloud) | `default`, `with-redis`, `behind-proxy` |
+| [`immich`](templates/immich) | `default`, `with-external-postgres` |

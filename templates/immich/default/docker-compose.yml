@@ -1,0 +1,43 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    restart: unless-stopped
+    ports:
+      - "2283:2283"
+    environment:
+      - DB_HOSTNAME=database
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE_NAME=${DB_DATABASE_NAME}
+      - REDIS_HOSTNAME=redis
+    env_file: .env
+    volumes:
+      - ./volumes/upload:/usr/src/app/upload
+    depends_on:
+      - redis
+      - database
+
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./volumes/model-cache:/cache
+
+  redis:
+    image: docker.io/valkey/valkey:8-bookworm
+    restart: unless-stopped
+    volumes:
+      - ./volumes/redis:/data
+
+  database:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE_NAME}
+      - POSTGRES_INITDB_ARGS=--data-checksums
+    env_file: .env
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
