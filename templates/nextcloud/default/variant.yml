@@ -1,0 +1,11 @@
+name: Default
+description: A single Nextcloud container with SQLite — good for trying it out
+usage: |
+  Open the published port in your browser and complete the first-run setup
+  wizard using the admin credentials from .env (NEXTCLOUD_ADMIN_USER /
+  NEXTCLOUD_ADMIN_PASSWORD).
+
+  This variant uses Nextcloud's bundled SQLite database, which is fine for
+  personal use but does not scale well with many files or users. Switch to
+  the with-redis variant (or point it at an external database) if you outgrow
+  it.

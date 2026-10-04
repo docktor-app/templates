@@ -1,0 +1,8 @@
+name: With Redis
+description: Adds a Redis container for Nextcloud's file-locking and caching backend
+usage: |
+  Nextcloud is pre-configured to use the redis service for file locking and
+  transactional caching — no extra setup needed after first start.
+
+  Open the published port in your browser and complete the first-run setup
+  wizard using the admin credentials from .env.

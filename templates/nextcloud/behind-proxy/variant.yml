@@ -1,0 +1,17 @@
+name: Behind a Reverse Proxy
+description: No published port — exposes Nextcloud to an existing Traefik reverse proxy via labels
+usage: |
+  This variant does not publish any port on the host. Instead it attaches to
+  an external Docker network named "proxy" and relies on Traefik labels for
+  routing, so it expects you to already be running Traefik (or adapt the
+  labels to your own reverse proxy) with that network available.
+
+  Before deploying:
+    1. Set NEXTCLOUD_DOMAIN in .env to the hostname you want to serve on.
+    2. Create the external network once, if it doesn't exist yet:
+       docker network create proxy
+    3. Make sure your reverse proxy is attached to that same network.
+
+  Nextcloud itself also needs to know its own public URL — set
+  NEXTCLOUD_TRUSTED_DOMAINS in .env to the same hostname, or first logins
+  will be rejected as an "untrusted domain".

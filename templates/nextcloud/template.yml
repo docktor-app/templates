@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Nextcloud
+description: A self-hosted file sync and collaboration platform
+category: Productivity
+icon: icon.svg
