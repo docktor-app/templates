@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Stirling PDF
+description: A self-hosted web toolbox to merge, split, convert, compress and edit PDFs
+category: Productivity
+icon: icon.svg

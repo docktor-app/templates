@@ -1,0 +1,21 @@
+name: Default
+description: Pi-hole with bridge networking and published DNS and web ports
+usage: |
+  Open the published web port (PIHOLE_WEB_PORT) in your browser at /admin
+  and log in with PIHOLE_ADMIN_PASSWORD from .env. Change that password
+  before deploying.
+
+  Port 53 conflicts with systemd-resolved on many Linux hosts (Ubuntu,
+  Debian) — if the stack fails to start with "address already in use", either
+  disable the resolved stub listener (set DNSStubListener=no in
+  /etc/systemd/resolved.conf and restart systemd-resolved) or change
+  PIHOLE_DNS_PORT, keeping in mind that clients can only use a non-53 port if
+  they support it.
+
+  Point your router's DHCP DNS setting (or individual devices) at this
+  host's IP address to start filtering.
+
+  Bridge networking is used, so FTLCONF_dns_listeningMode=ALL is set to let
+  Pi-hole answer queries arriving through Docker's network. Pi-hole's built-in
+  DHCP server will not work in this mode; it needs host networking and the
+  NET_ADMIN capability, which this template does not enable.

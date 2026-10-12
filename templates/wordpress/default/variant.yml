@@ -1,0 +1,16 @@
+name: Default
+description: WordPress (Apache) with a bundled MariaDB database
+usage: |
+  Before deploying, replace the database passwords in .env. Generate strong
+  values with:
+    openssl rand -hex 24
+
+  Open the published port in your browser and complete the WordPress
+  install wizard (site title, admin user and password).
+
+  The database passwords are only applied the first time MariaDB
+  initialises ./volumes/db; changing them in .env afterwards will not
+  update the existing database users.
+
+  If you put WordPress behind a reverse proxy or change the port, update
+  the site URL under Settings > General after installing.

@@ -1,0 +1,16 @@
+name: Default
+description: Vikunja with its built-in SQLite database — a single container
+usage: |
+  Open the published port in your browser and use "Register" to create your
+  account — there is no default login. The first registered user can then
+  create projects and tasks.
+
+  Set VIKUNJA_SERVICE_PUBLICURL in .env to the URL you reach Vikunja at
+  (needed for links in emails and for the API), and replace
+  VIKUNJA_SERVICE_JWTSECRET with a long random string before the first start.
+  Set VIKUNJA_SERVICE_ENABLEREGISTRATION=false once your accounts exist.
+
+  Vikunja runs as UID 1000. If it fails to write to ./volumes/files or
+  ./volumes/db, run: chown -R 1000:1000 volumes. The SQLite database is in
+  ./volumes/db — back it up. Suited for personal or small-team use; switch to
+  the with-postgres variant for larger setups.

@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Nginx Proxy Manager
+description: A web UI for managing Nginx reverse proxy hosts with free Let's Encrypt certificates
+category: Networking
+icon: icon.svg

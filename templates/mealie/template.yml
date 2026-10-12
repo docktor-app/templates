@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Mealie
+description: A self-hosted recipe manager and meal planner
+category: Content & Web
+icon: icon.svg

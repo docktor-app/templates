@@ -1,0 +1,15 @@
+name: With MySQL
+description: Ghost backed by a MySQL 8 container instead of SQLite
+usage: |
+  Before deploying, set GHOST_URL in .env to the public URL you will serve
+  Ghost on (including http:// or https://), and replace the database
+  passwords. Generate strong values with:
+    openssl rand -hex 24
+
+  Open the published port in your browser and go to /ghost to create the
+  admin account. Ghost has no default credentials; the first account you
+  create becomes the owner.
+
+  The database passwords are only applied the first time MySQL initialises
+  ./volumes/mysql; changing them in .env afterwards will not update the
+  existing database users.

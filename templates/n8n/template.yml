@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: n8n
+description: Workflow automation platform with a visual editor and hundreds of integrations
+category: Automation & AI
+icon: icon.svg

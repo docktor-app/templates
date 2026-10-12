@@ -1,0 +1,14 @@
+name: Default
+description: code-server (VS Code in the browser) with persistent config and workspace
+usage: |
+  Open the published port in your browser and log in with the PASSWORD from
+  .env. Change it before deploying: anyone who can reach the port and knows
+  the password gets a full shell in the container.
+
+  Your projects live in ./volumes/workspace (opened as /config/workspace)
+  and settings/extensions in ./volumes/config. PUID/PGID control which host
+  user owns those files; match them to your own user (run `id`).
+
+  code-server is served over plain HTTP. Put it behind a reverse proxy with
+  HTTPS before exposing it to the internet (some browser features, such as
+  the clipboard and service workers, require a secure context).

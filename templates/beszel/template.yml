@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Beszel
+description: A lightweight server monitoring hub with Docker stats, history and alerts
+category: Monitoring
+icon: icon.svg

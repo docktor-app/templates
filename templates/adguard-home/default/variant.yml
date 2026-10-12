@@ -1,0 +1,21 @@
+name: Default
+description: AdGuard Home with bridge networking and published DNS, setup, and web ports
+usage: |
+  On first start, open the setup port (ADGUARD_SETUP_PORT, default 3000) in
+  your browser and run the install wizard. This is where you create the admin
+  username and password — there are no default credentials.
+
+  In the wizard, leave the admin web interface listening on port 80 (that is
+  the container port published as ADGUARD_WEB_PORT) and DNS on port 53. After
+  the wizard finishes, use ADGUARD_WEB_PORT to reach the dashboard; the setup
+  port is no longer used.
+
+  Port 53 conflicts with systemd-resolved on many Linux hosts (Ubuntu,
+  Debian) — if the stack fails to start with "address already in use", either
+  disable the resolved stub listener (set DNSStubListener=no in
+  /etc/systemd/resolved.conf and restart systemd-resolved) or change
+  ADGUARD_DNS_PORT.
+
+  Point your router's DHCP DNS setting (or individual devices) at this host's
+  IP address to start filtering. AdGuard Home's built-in DHCP server needs
+  host networking and is not available in this variant.

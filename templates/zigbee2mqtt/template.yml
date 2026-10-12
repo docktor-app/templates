@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Zigbee2MQTT
+description: Bridge Zigbee devices to MQTT without a vendor gateway
+category: Home & IoT
+icon: icon.svg

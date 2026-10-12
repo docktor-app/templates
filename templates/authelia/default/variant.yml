@@ -1,0 +1,24 @@
+name: Default
+description: Authelia with a file-based user database and SQLite storage
+usage: |
+  Before the FIRST start, edit .env:
+    - AUTH_DOMAIN: your root domain (cookies are set for it and rules
+      apply to *.<domain>), e.g. example.com
+    - AUTH_PUBLIC_URL: the URL users reach the Authelia portal on
+    - the three secrets, each generated with   openssl rand -hex 32
+
+  Users live in config/users_database.yml next to docker-compose.yml. The
+  example user "admin" has the password "changeme" - replace the hash before
+  exposing Authelia. Generate a hash with:
+    docker run --rm authelia/authelia:4.39.28 authelia crypto hash generate argon2 --password 'yourpassword'
+
+  config/configuration.yml is a minimal example: one_factor for all
+  subdomains of AUTH_DOMAIN, with notifications written to
+  config/notification.txt (one-time codes for registering 2FA devices end up
+  there instead of being emailed). Configure an SMTP notifier for real use
+  and add per-domain access_control rules for your apps.
+
+  Authelia is not a standalone login page: point your reverse proxy
+  (Traefik, nginx, Caddy) at its forward-auth endpoint, e.g.
+  http://authelia:9091/api/authz/forward-auth. Browsers need HTTPS for
+  session cookies, so serve the portal behind a TLS proxy.

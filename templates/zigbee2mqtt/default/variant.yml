@@ -1,0 +1,20 @@
+name: Default
+description: Zigbee2MQTT with a USB Zigbee adapter and an external MQTT broker
+usage: |
+  Before the first start, edit .env:
+
+  - ZIGBEE_DEVICE: path of your Zigbee USB adapter on the Docker host.
+    Prefer the stable path from /dev/serial/by-id/ over /dev/ttyACM0. It is
+    mapped to /dev/ttyACM0 inside the container (via devices:, no privileged
+    mode needed). Linux hosts only.
+  - MQTT_SERVER (e.g. mqtt://192.168.1.10:1883) and, if your broker
+    requires logins, the ZIGBEE2MQTT_CONFIG_MQTT_USER / _PASSWORD lines. The mosquitto template
+    from this repository works as the broker.
+
+  Open the published port to reach the web frontend. Pair devices by
+  enabling "Permit join" in the frontend. The network key is generated on
+  first start and stored in ./volumes/data/secret.yaml - back it up.
+
+  If your adapter needs a specific driver (e.g. ConBee/deCONZ or EZSP),
+  add "adapter: ember" (or "zstack"/"deconz") under "serial:" in
+  configuration.yaml.

@@ -1,0 +1,17 @@
+services:
+  syncthing:
+    image: syncthing/syncthing:2.1.6
+    restart: unless-stopped
+    ports:
+      - "${SYNCTHING_GUI_PORT}:8384"
+      - "${SYNCTHING_SYNC_PORT}:22000/tcp"
+      - "${SYNCTHING_SYNC_PORT}:22000/udp"
+      - "${SYNCTHING_DISCOVERY_PORT}:21027/udp"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - STGUIADDRESS=0.0.0.0:8384
+    env_file: .env
+    volumes:
+      - ./volumes/config:/var/syncthing/config
+      - ./volumes/data:/var/syncthing/Sync

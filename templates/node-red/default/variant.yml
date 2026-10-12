@@ -1,0 +1,14 @@
+name: Default
+description: Node-RED editor with persistent flows and installed nodes
+usage: |
+  Open the published port in your browser to reach the Node-RED editor.
+  There is no login by default - do not expose the port to untrusted
+  networks. To enable authentication, set adminAuth in
+  ./volumes/data/settings.js after the first start.
+
+  Flows, credentials and installed palette nodes are stored in
+  ./volumes/data. The container runs as user 1000; if it fails with a
+  permission error, run: chown -R 1000:1000 ./volumes/data
+
+  To reach an MQTT broker from another stack, use the broker's host name or
+  IP address in the MQTT node settings.

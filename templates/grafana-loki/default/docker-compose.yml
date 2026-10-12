@@ -1,0 +1,41 @@
+services:
+  grafana:
+    image: grafana/grafana:13.2.3
+    restart: unless-stopped
+    user: "0:0"
+    ports:
+      - "${GRAFANA_PORT}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+    env_file: .env
+    volumes:
+      - ./volumes/grafana:/var/lib/grafana
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+    depends_on:
+      - loki
+
+  loki:
+    image: grafana/loki:3.7.8
+    restart: unless-stopped
+    user: "0:0"
+    command: -config.file=/etc/loki/loki.yml
+    ports:
+      - "${LOKI_PORT}:3100"
+    env_file: .env
+    volumes:
+      - ./loki.yml:/etc/loki/loki.yml:ro
+      - ./volumes/loki:/loki
+
+  promtail:
+    image: grafana/promtail:3.6.11
+    restart: unless-stopped
+    user: "0:0"
+    command: -config.file=/etc/promtail/promtail.yml
+    env_file: .env
+    volumes:
+      - ./promtail.yml:/etc/promtail/promtail.yml:ro
+      - /var/log:/var/log:ro
+      - ./volumes/promtail:/positions
+    depends_on:
+      - loki

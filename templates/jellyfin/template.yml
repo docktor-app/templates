@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Jellyfin
+description: A free software media system for streaming your movies, shows, and music
+category: Media
+icon: icon.svg

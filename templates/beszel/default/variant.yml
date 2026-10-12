@@ -1,0 +1,15 @@
+name: Default
+description: The Beszel hub (web UI and database), agents are added separately
+usage: |
+  This stack runs the Beszel hub only. Open the published port and create
+  the admin account on first visit.
+
+  To monitor a server, install an agent on it:
+  1. In the hub click "Add System". It shows the hub's public key and a
+     ready-made docker-compose snippet / install command for the agent.
+  2. Run that agent on the target host. It listens on port 45876 by default
+     and needs the hub's public key (KEY) to accept connections.
+  3. Save the system in the hub with the host's address and port 45876.
+
+  To also monitor the machine the hub runs on, install an agent there too.
+  Hub data (including its SSH key pair) lives in ./volumes/data.

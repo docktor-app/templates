@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Syncthing
+description: Continuous, private peer-to-peer file synchronization between your devices
+category: Automation & AI
+icon: icon.svg

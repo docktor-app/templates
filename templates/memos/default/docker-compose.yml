@@ -1,0 +1,9 @@
+services:
+  memos:
+    image: ghcr.io/usememos/memos:0.31.0
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-5230}:5230"
+    env_file: .env
+    volumes:
+      - ./volumes/data:/var/opt/memos

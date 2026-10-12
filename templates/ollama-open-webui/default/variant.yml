@@ -1,0 +1,17 @@
+name: Default (CPU)
+description: Ollama and Open WebUI running on the CPU - works on any host
+usage: |
+  Set WEBUI_SECRET_KEY in .env to a long random string before the first
+  start. Open the WebUI port in your browser; the first account you create
+  becomes the admin - there are no default credentials.
+
+  No models are installed yet. Download one from the WebUI (Admin Panel ->
+  Settings -> Models) or from the host, for example:
+    docker compose exec ollama ollama pull llama3.2
+
+  Inference on the CPU is slow for larger models; pick small models (1-8B)
+  or use the with-gpu variant. Models are stored in ./volumes/ollama and can
+  be several GB each.
+
+  The Ollama API is also published (OLLAMA_PORT, default 11434) and has no
+  authentication - restrict it to a trusted network.

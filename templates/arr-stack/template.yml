@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Arr Stack
+description: Sonarr, Radarr, Prowlarr, and qBittorrent for automated media downloads
+category: Media Automation
+icon: icon.svg

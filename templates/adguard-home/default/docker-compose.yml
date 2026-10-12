@@ -1,0 +1,13 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome:v0.107.79
+    restart: unless-stopped
+    ports:
+      - "${ADGUARD_DNS_PORT}:53/tcp"
+      - "${ADGUARD_DNS_PORT}:53/udp"
+      - "${ADGUARD_SETUP_PORT}:3000/tcp"
+      - "${ADGUARD_WEB_PORT}:80/tcp"
+    env_file: .env
+    volumes:
+      - ./volumes/work:/opt/adguardhome/work
+      - ./volumes/conf:/opt/adguardhome/conf

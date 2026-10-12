@@ -1,0 +1,9 @@
+services:
+  beszel:
+    image: henrygd/beszel:0.21.0
+    restart: unless-stopped
+    ports:
+      - "${BESZEL_PORT}:8090"
+    env_file: .env
+    volumes:
+      - ./volumes/data:/beszel_data

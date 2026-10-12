@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: WireGuard Easy
+description: A WireGuard VPN server with a simple web UI for managing clients
+category: Networking
+icon: icon.svg

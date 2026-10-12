@@ -1,0 +1,14 @@
+services:
+  n8n:
+    image: n8nio/n8n:2.42.7
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT}:5678"
+    environment:
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - TZ=${GENERIC_TIMEZONE}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - N8N_SECURE_COOKIE=${N8N_SECURE_COOKIE}
+    env_file: .env
+    volumes:
+      - ./volumes/data:/home/node/.n8n

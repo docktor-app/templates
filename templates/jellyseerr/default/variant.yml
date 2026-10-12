@@ -1,0 +1,16 @@
+name: Default
+description: Seerr (the maintained successor of Jellyseerr) for requesting movies and shows
+usage: |
+  Open the published port (JELLYSEERR_PORT, default 5055) in your browser and
+  sign in with your Jellyfin, Plex, or Emby account to run the setup wizard.
+
+  In the wizard, connect your media server and then your Sonarr / Radarr
+  instances. If they run in another stack, use an address reachable from this
+  container (for example http://<host-ip>:8989); if you deployed the
+  arr-stack template on the same host, use its published ports.
+
+  Jellyseerr has been merged into the Seerr project; this image is the
+  official continuation and keeps the same configuration format.
+
+  The container runs as PUID:PGID from .env, so ./volumes/config must be
+  writable by that user (for example chown -R 1000:1000 ./volumes/config).

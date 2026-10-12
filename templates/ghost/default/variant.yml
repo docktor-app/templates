@@ -1,0 +1,16 @@
+name: Default
+description: A single Ghost container with SQLite - good for small blogs and trying it out
+usage: |
+  Set GHOST_URL in .env to the public URL you will serve Ghost on (including
+  http:// or https://) before deploying. Ghost uses it to build links and
+  will misbehave if it does not match how you reach it.
+
+  Open the published port in your browser and go to /ghost to create the
+  admin account. Ghost has no default credentials; the first account you
+  create becomes the owner.
+
+  This variant uses SQLite, which Ghost supports for a single instance. Use
+  the with-mysql variant if you prefer MySQL.
+
+  Sending email (newsletters, password resets) requires configuring a mail
+  provider; see the Ghost docs for the mail__* environment variables.

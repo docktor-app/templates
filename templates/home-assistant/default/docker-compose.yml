@@ -1,0 +1,10 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:2026.10.1
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=${TZ}
+    env_file: .env
+    volumes:
+      - ./volumes/config:/config

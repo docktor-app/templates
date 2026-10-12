@@ -1,0 +1,17 @@
+name: Default
+description: A remotely managed Cloudflare Tunnel connector, authenticated with a tunnel token
+usage: |
+  1. In the Cloudflare Zero Trust dashboard, go to Networks > Tunnels and
+     create a tunnel (type: Cloudflared).
+  2. Copy the tunnel token from the install command shown (the long string
+     after "--token") and paste it into CLOUDFLARE_TUNNEL_TOKEN in .env.
+  3. Deploy the stack; the tunnel shows as Healthy in the dashboard.
+  4. Add public hostnames to the tunnel in the dashboard and point each one at
+     a service URL.
+
+  This stack publishes no ports. To reach other containers by service name
+  (for example http://myapp:8080), attach both this stack and the target
+  stack to a shared external Docker network. Services on the host itself can
+  be reached via the host's LAN IP address.
+
+  Treat the token like a password: anyone with it can run your tunnel.

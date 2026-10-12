@@ -1,0 +1,16 @@
+services:
+  vikunja:
+    image: vikunja/vikunja:2.7.0
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3456}:3456"
+    env_file: .env
+    environment:
+      - VIKUNJA_SERVICE_PUBLICURL=${VIKUNJA_SERVICE_PUBLICURL}
+      - VIKUNJA_SERVICE_JWTSECRET=${VIKUNJA_SERVICE_JWTSECRET}
+      - VIKUNJA_SERVICE_ENABLEREGISTRATION=${VIKUNJA_SERVICE_ENABLEREGISTRATION:-true}
+      - VIKUNJA_DATABASE_TYPE=sqlite
+      - VIKUNJA_DATABASE_PATH=/db/vikunja.db
+    volumes:
+      - ./volumes/files:/app/vikunja/files
+      - ./volumes/db:/db

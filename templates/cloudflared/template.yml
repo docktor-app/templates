@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Cloudflared
+description: Cloudflare Tunnel connector that exposes services without opening inbound ports
+category: Networking
+icon: icon.svg

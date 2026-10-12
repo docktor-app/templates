@@ -1,0 +1,14 @@
+name: With PostgreSQL
+description: Gitea backed by a dedicated PostgreSQL container
+usage: |
+  Open the web port in your browser. The installer is skipped; the first
+  account you register becomes the administrator.
+
+  Git over SSH is published on the SSH port from .env (default 2222), so
+  clone URLs look like ssh://git@<host>:2222/<user>/<repo>.git. Set
+  GITEA_DOMAIN and GITEA_ROOT_URL to the address users will actually use,
+  otherwise clone links and webhooks point at localhost.
+
+  Repositories and config live in ./volumes/data, the database in
+  ./volumes/postgres. Change POSTGRES_PASSWORD in .env BEFORE the first
+  start; the database keeps the password it was first initialised with.

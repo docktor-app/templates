@@ -1,0 +1,11 @@
+name: Default
+description: Uptime Kuma with built-in SQLite storage in a single container
+usage: |
+  Open the published port in your browser and create the admin account on
+  first visit. Uptime Kuma has no default credentials.
+
+  Add monitors (HTTP, TCP, ping, DNS, Docker, ...) from the dashboard and
+  optionally publish a public status page. Notification channels (email,
+  Telegram, Discord, ...) are configured under Settings > Notifications.
+
+  All data lives in ./volumes/data.

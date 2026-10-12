@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: WordPress
+description: The most popular content management system for websites and blogs
+category: Content & Web
+icon: icon.svg

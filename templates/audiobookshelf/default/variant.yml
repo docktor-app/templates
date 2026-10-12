@@ -1,0 +1,12 @@
+name: Default
+description: A single Audiobookshelf container for audiobooks and podcasts
+usage: |
+  Open the published port (AUDIOBOOKSHELF_PORT, default 13378) in your
+  browser and create the root admin account on first launch.
+
+  Add libraries pointing at /audiobooks and /podcasts (inside the container);
+  on the host these are ./volumes/audiobooks and ./volumes/podcasts. Replace
+  the bind mounts with your existing library paths if you have one.
+
+  The container runs as PUID:PGID from .env, so make sure that user can
+  read and write the ./volumes directories.

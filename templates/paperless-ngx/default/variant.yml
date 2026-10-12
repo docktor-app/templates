@@ -1,0 +1,17 @@
+name: Default
+description: Paperless-ngx with Postgres and Redis — suited for PDFs, images and plain-text documents
+usage: |
+  Open the published port in your browser and log in with the admin
+  credentials from .env (PAPERLESS_ADMIN_USER / PAPERLESS_ADMIN_PASSWORD).
+  They are only used to create the account on the very first start; change
+  the password in the UI afterwards.
+
+  Drop files into ./volumes/consume to have them imported automatically.
+  Processed originals are stored in ./volumes/media and exports go to
+  ./volumes/export.
+
+  Change DB_PASSWORD and PAPERLESS_SECRET_KEY (a long random string) before
+  the first start, and set PAPERLESS_URL to the public URL if you use a
+  reverse proxy. Set PAPERLESS_OCR_LANGUAGE (e.g. eng, deu) and
+  PAPERLESS_TIME_ZONE to match your documents. Office and email files
+  (docx, xlsx, eml) need the with-tika-gotenberg variant.

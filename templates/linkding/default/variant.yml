@@ -1,0 +1,11 @@
+name: Default
+description: linkding with its built-in SQLite database
+usage: |
+  Open the published port in your browser and log in with the superuser
+  credentials from .env (LD_SUPERUSER_NAME / LD_SUPERUSER_PASSWORD). Replace
+  the placeholder password before the first start; the superuser is only
+  created on the first run, so later changes to it in .env have no effect.
+  Change the password in the settings page afterwards if needed.
+
+  A browser extension and mobile apps are available; generate an API token
+  under Settings > Integrations to connect them.

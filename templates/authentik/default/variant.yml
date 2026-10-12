@@ -1,0 +1,21 @@
+name: Default
+description: authentik server and worker with Postgres and Redis
+usage: |
+  Before the FIRST start, edit .env:
+    - AUTHENTIK_SECRET_KEY: generate with   openssl rand -base64 60 | tr -d '\n'
+      (do not change it later or existing sessions and data break)
+    - PG_PASS: generate with   openssl rand -base64 36 | tr -d '\n'
+    - AUTHENTIK_BOOTSTRAP_PASSWORD and AUTHENTIK_BOOTSTRAP_EMAIL: initial
+      credentials of the built-in "akadmin" user
+
+  Then log in at http://<host>:<AUTHENTIK_PORT_HTTP>/ as akadmin with the
+  bootstrap password. If you removed the bootstrap values, open
+  http://<host>:<AUTHENTIK_PORT_HTTP>/if/flow/initial-setup/ instead. The
+  bootstrap variables only take effect on the very first start.
+
+  The image is pinned to 2025.8.x, the last release line that uses Redis.
+  Newer authentik versions removed Redis; if you upgrade, follow the
+  authentik release notes and drop the redis service.
+
+  Put authentik behind a TLS reverse proxy for real use; the HTTPS port
+  (AUTHENTIK_PORT_HTTPS) uses a self-signed certificate.

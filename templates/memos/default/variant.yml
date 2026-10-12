@@ -1,0 +1,9 @@
+name: Default
+description: Memos as a single container with its built-in SQLite database
+usage: |
+  Open the published port in your browser. On first visit Memos asks you to
+  create the host (admin) account — there is no default login, so choose a
+  strong password right away.
+
+  Afterwards you can disable public sign-ups in Settings > System. All data
+  (SQLite database and uploads) lives in ./volumes/data — back it up.

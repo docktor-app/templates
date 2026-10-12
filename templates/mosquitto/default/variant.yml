@@ -1,0 +1,22 @@
+name: Default
+description: Mosquitto MQTT broker with a bind-mounted mosquitto.conf
+usage: |
+  The broker listens on the published MQTT port (default 1883). The config
+  is mosquitto.conf in this stack's directory; data and logs are stored in
+  ./volumes/.
+
+  By default anonymous clients are allowed so the broker works immediately.
+  Only expose it to a trusted network, or enable authentication:
+
+  1. Add a password file mount to the mosquitto service in
+     docker-compose.yml:
+       - ./passwd:/mosquitto/config/passwd
+  2. Create the file with a first user (you will be asked for a password):
+       touch passwd
+       docker compose run --rm -it mosquitto mosquitto_passwd -c /mosquitto/config/passwd <username>
+     Add further users with the same command without -c.
+  3. In mosquitto.conf set "allow_anonymous false" and uncomment the
+     "password_file" line.
+  4. Restart the stack: docker compose restart mosquitto
+
+  Test with: mosquitto_sub -h <host> -p <port> -t "#" -v

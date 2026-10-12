@@ -1,0 +1,38 @@
+# Minimal example configuration. Values such as {{ env "AUTH_DOMAIN" }} are
+# filled in from .env (X_AUTHELIA_CONFIG_FILTERS=template). Secrets are passed
+# as AUTHELIA_* environment variables and must not be written here.
+server:
+  address: 'tcp://:9091'
+
+log:
+  level: 'info'
+
+theme: 'auto'
+
+authentication_backend:
+  file:
+    path: '/config/users_database.yml'
+
+access_control:
+  default_policy: 'deny'
+  rules:
+    - domain: '*.{{ env "AUTH_DOMAIN" }}'
+      policy: 'one_factor'
+
+session:
+  cookies:
+    - domain: '{{ env "AUTH_DOMAIN" }}'
+      authelia_url: '{{ env "AUTH_PUBLIC_URL" }}'
+
+regulation:
+  max_retries: 3
+  find_time: '2 minutes'
+  ban_time: '5 minutes'
+
+storage:
+  local:
+    path: '/config/db.sqlite3'
+
+notifier:
+  filesystem:
+    filename: '/config/notification.txt'

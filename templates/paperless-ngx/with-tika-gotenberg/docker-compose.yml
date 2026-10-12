@@ -1,0 +1,55 @@
+services:
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.3.0
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    env_file: .env
+    environment:
+      - PAPERLESS_REDIS=redis://broker:6379
+      - PAPERLESS_DBHOST=db
+      - PAPERLESS_DBNAME=${DB_DATABASE_NAME}
+      - PAPERLESS_DBUSER=${DB_USERNAME}
+      - PAPERLESS_DBPASS=${DB_PASSWORD}
+      - PAPERLESS_TIKA_ENABLED=1
+      - PAPERLESS_TIKA_GOTENBERG_ENDPOINT=http://gotenberg:3000
+      - PAPERLESS_TIKA_ENDPOINT=http://tika:9998
+    volumes:
+      - ./volumes/data:/usr/src/paperless/data
+      - ./volumes/media:/usr/src/paperless/media
+      - ./volumes/export:/usr/src/paperless/export
+      - ./volumes/consume:/usr/src/paperless/consume
+    depends_on:
+      - db
+      - broker
+      - gotenberg
+      - tika
+
+  broker:
+    image: redis:8.8.3
+    restart: unless-stopped
+    volumes:
+      - ./volumes/redis:/data
+
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE_NAME}
+    env_file: .env
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+
+  gotenberg:
+    image: gotenberg/gotenberg:8.37.0
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+
+  tika:
+    image: apache/tika:4.1.0-1
+    restart: unless-stopped

@@ -1,0 +1,19 @@
+name: Default
+description: Grafana, Loki and Promtail with Loki preconfigured as datasource
+usage: |
+  Open the Grafana port and log in with GRAFANA_ADMIN_USER /
+  GRAFANA_ADMIN_PASSWORD from .env. Loki is already provisioned as the
+  default datasource. Open Explore, pick Loki and run for example
+  {job="varlogs"} to browse the host's logs.
+
+  Promtail tails the host's /var/log (mounted read-only) and pushes it to
+  Loki. It does not use the Docker socket, so container logs are not
+  collected automatically; add scrape configs to promtail.yml (in this
+  stack's directory) for other log files and restart the promtail service.
+  Some files in /var/log may be unreadable for Promtail depending on host
+  permissions. On systemd-only hosts there may be few plain log files.
+
+  Data lives in ./volumes/grafana, ./volumes/loki and ./volumes/promtail.
+  Loki's port is published so other hosts can push logs to
+  http://<host>:<LOKI_PORT>/loki/api/v1/push; it has no authentication, so
+  keep it off untrusted networks.

@@ -1,0 +1,22 @@
+name: Default
+description: Caddy with an example Caddyfile that reverse proxies one domain to one upstream
+usage: |
+  The Caddyfile is defined inline in docker-compose.yml (under "configs:")
+  and is generated from two values in .env: CADDY_DOMAIN and CADDY_UPSTREAM.
+  By default it serves "localhost" with Caddy's internal CA and proxies to
+  app:8080, which is only a placeholder.
+
+  To use it:
+    1. Set CADDY_DOMAIN to a public hostname whose DNS points at this host.
+       Caddy then obtains and renews a Let's Encrypt certificate
+       automatically. Ports 80 and 443 must be reachable from the internet.
+    2. Set CADDY_UPSTREAM to the service to proxy to, as host:port. To reach
+       a container, attach it to the same Docker network as Caddy (add a
+       shared external network to both stacks) and use its service name.
+    3. For more sites, edit the Caddyfile text in docker-compose.yml, add
+       another site block, and redeploy.
+
+  Certificates and Caddy state persist in ./volumes/data and ./volumes/config.
+  If you serve "localhost", browsers will warn about the local CA until you
+  trust it (run "caddy trust" inside the container and import the root
+  certificate from ./volumes/data/caddy/pki/authorities/local/root.crt).

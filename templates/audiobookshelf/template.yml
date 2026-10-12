@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Audiobookshelf
+description: A self-hosted audiobook and podcast server
+category: Media
+icon: icon.svg

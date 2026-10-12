@@ -1,0 +1,10 @@
+# Example user database. The password for "admin" is "changeme" - replace the
+# hash (see the variant usage text for how to generate one) before real use.
+users:
+  admin:
+    disabled: false
+    displayname: 'Administrator'
+    password: '$argon2id$v=19$m=65536,t=3,p=4$OPCqyll5DqEQWMmqQYgcZA$99h8vQBhH1/8xYAT7b04Yp57OBkfkeHwesEVhdKaNQM'
+    email: 'admin@example.com'
+    groups:
+      - 'admins'

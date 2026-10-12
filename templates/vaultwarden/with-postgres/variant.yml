@@ -1,0 +1,17 @@
+name: With Postgres
+description: Vaultwarden backed by a dedicated Postgres database instead of SQLite
+usage: |
+  Open the published port in your browser and create your account — there is
+  no default login. Vaultwarden creates its tables in Postgres on first start.
+
+  IMPORTANT: Bitwarden clients and the web vault require HTTPS (except on
+  localhost). Put Vaultwarden behind a reverse proxy with TLS and set DOMAIN
+  in .env to the public https:// URL.
+
+  Change DB_PASSWORD before the first start. It is embedded in a connection
+  URL, so use only URL-safe characters (letters, digits, - and _). Changing
+  it later does not update an already-initialised database.
+
+  Set ADMIN_TOKEN in .env to enable the /admin panel (leave empty to keep it
+  disabled). After creating your accounts, set SIGNUPS_ALLOWED=false and
+  redeploy. Back up ./volumes/postgres and ./volumes/data (attachments, keys).

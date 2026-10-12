@@ -1,0 +1,18 @@
+name: Default (SQLite)
+description: n8n with the built-in SQLite database - simplest setup
+usage: |
+  Before the first start, set N8N_ENCRYPTION_KEY in .env to a long random
+  string (e.g. openssl rand -hex 32). It encrypts the credentials you store
+  in n8n; keep a backup, losing it makes stored credentials unreadable.
+
+  Open the published port in your browser and create the owner account on
+  first visit - there are no default credentials.
+
+  N8N_SECURE_COOKIE=false allows logging in over plain HTTP on a LAN. Set it
+  to true once n8n is served over HTTPS.
+
+  Data (SQLite database, workflows) lives in ./volumes/data. The container
+  runs as user 1000; if you see permission errors, run:
+  chown -R 1000:1000 ./volumes/data
+
+  For heavier use, consider the with-postgres variant.

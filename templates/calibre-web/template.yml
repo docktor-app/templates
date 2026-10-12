@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Calibre-Web
+description: A web app for browsing, reading, and downloading e-books from a Calibre library
+category: Media
+icon: icon.svg

@@ -1,0 +1,23 @@
+name: Default
+description: wg-easy WireGuard VPN server with its web UI, set up automatically from .env
+usage: |
+  Before deploying, set WG_HOST in .env to the public hostname or IP address
+  clients will connect to, and change WG_ADMIN_PASSWORD (it must be at least
+  12 characters with upper and lower case letters, a digit and a special
+  character). The admin user and password are applied only on the very first
+  start, while wg-easy has no configuration yet; later changes are made in
+  the web UI.
+
+  Open the UI port (WG_UI_PORT, default 51821) in your browser, log in, and
+  create clients; scan the QR code with the WireGuard app or download the
+  config file. Forward the UDP port WG_PORT (default 51820) from your router
+  to this host.
+
+  This container needs the NET_ADMIN and SYS_MODULE capabilities and the
+  net.ipv4.ip_forward / src_valid_mark sysctls to create the WireGuard
+  interface and route traffic. It is not privileged and does not mount the
+  Docker socket.
+
+  WG_INSECURE=true allows logging in to the UI over plain HTTP. Do not expose
+  the UI port to the internet this way: put it behind an HTTPS reverse proxy
+  and set WG_INSECURE=false, or keep it reachable only from your LAN/VPN.

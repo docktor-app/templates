@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Ollama + Open WebUI
+description: Run large language models locally with Ollama and chat with them through Open WebUI
+category: Automation & AI
+icon: icon.svg

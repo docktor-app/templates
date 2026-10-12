@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Home Assistant
+description: Open-source home automation platform that puts local control and privacy first
+category: Home & IoT
+icon: icon.svg

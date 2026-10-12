@@ -1,0 +1,18 @@
+name: Default
+description: Homepage dashboard configured from YAML files, without the Docker integration
+usage: |
+  Open the published port in your browser. Homepage refuses requests whose
+  Host header it does not know, so set HOMEPAGE_ALLOWED_HOSTS in .env to the
+  host:port you use in the browser (for example 192.168.1.10:3000 or
+  home.example.com). Several values can be comma separated.
+
+  The dashboard is configured by the YAML files in the config/ directory next
+  to docker-compose.yml:
+    services.yaml   service tiles and groups
+    bookmarks.yaml  bookmark groups
+    widgets.yaml    top-bar widgets (resources, date/time)
+    settings.yaml   title, theme, layout
+
+  Edits are picked up automatically, no restart needed. This variant does
+  not mount the Docker socket, so Docker container auto-discovery and status
+  is intentionally disabled; list your services manually in services.yaml.

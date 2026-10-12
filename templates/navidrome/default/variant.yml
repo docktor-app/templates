@@ -1,0 +1,12 @@
+name: Default
+description: A single Navidrome container serving a music library
+usage: |
+  Open the published port (NAVIDROME_PORT, default 4533) in your browser and
+  create the first (admin) account on the initial screen.
+
+  Put your music in ./volumes/music (mounted read-only at /music) or replace
+  that bind mount with the path to your existing library. Navidrome rescans
+  periodically; trigger a scan from the UI if files do not show up.
+
+  Any Subsonic-compatible client (DSub, Symfonium, Feishin, ...) can connect
+  using this server URL and your Navidrome credentials.

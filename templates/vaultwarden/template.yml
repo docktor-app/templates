@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Vaultwarden
+description: A lightweight, self-hosted Bitwarden-compatible password manager
+category: Auth & Security
+icon: icon.svg

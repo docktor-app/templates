@@ -1,0 +1,14 @@
+name: Default
+description: Calibre-Web serving an existing Calibre library
+usage: |
+  Open the published port (CALIBRE_WEB_PORT, default 8083) in your browser.
+  Default login: admin / admin123 - change the password immediately.
+
+  On first start, set "Location of Calibre Database" to /books. This must be
+  a folder containing a Calibre library (metadata.db). Put your Calibre
+  library in ./volumes/books (or replace the bind mount with the path to it).
+  An empty folder will not work: create the library with desktop Calibre
+  first, or copy an empty metadata.db into the folder.
+
+  To enable uploads, turn on "Enable Uploads" in Admin > Edit Basic
+  Configuration > Feature Configuration.

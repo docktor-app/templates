@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Vikunja
+description: A self-hosted to-do and project management app with lists, kanban and gantt views
+category: Productivity
+icon: icon.svg

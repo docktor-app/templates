@@ -1,0 +1,15 @@
+name: Default
+description: Mealie with its built-in SQLite database
+usage: |
+  Open the published port in your browser and log in with the default
+  account:
+    Email:    changeme@example.com
+    Password: MyPassword
+
+  Change both immediately under your user profile after the first login.
+
+  Set BASE_URL in .env to the URL you reach Mealie on (used for links in
+  shared recipes and emails) and TZ to your timezone. Set ALLOW_SIGNUP to
+  true if you want new users to be able to register themselves.
+
+  This variant uses SQLite, which is fine for home use.

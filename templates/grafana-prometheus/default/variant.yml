@@ -1,0 +1,17 @@
+name: Default
+description: Grafana, Prometheus and node-exporter with Prometheus preconfigured as datasource
+usage: |
+  Open the Grafana port and log in with GRAFANA_ADMIN_USER /
+  GRAFANA_ADMIN_PASSWORD from .env. Prometheus is already provisioned as the
+  default datasource, so you can start exploring right away.
+
+  Import a ready-made dashboard via Dashboards > New > Import and enter ID
+  1860 (Node Exporter Full) to see this host's CPU, memory, disk and network.
+
+  Prometheus is published on its own port and scrapes itself and
+  node-exporter; add more targets in prometheus.yml (in this stack's
+  directory) and restart the prometheus service. Metrics are kept for the
+  period set by PROMETHEUS_RETENTION.
+
+  node-exporter reads the host's /proc, /sys and root filesystem read-only.
+  Data lives in ./volumes/grafana and ./volumes/prometheus.

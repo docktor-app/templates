@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: linkding
+description: A minimal self-hosted bookmark manager
+category: Content & Web
+icon: icon.svg

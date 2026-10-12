@@ -1,0 +1,18 @@
+name: With MariaDB
+description: Nginx Proxy Manager backed by a bundled MariaDB container instead of SQLite
+usage: |
+  Change MYSQL_ROOT_PASSWORD and MYSQL_PASSWORD in .env before the first
+  start — MariaDB only reads them when it initializes an empty data
+  directory, so changing them later does not update an existing database.
+
+  Open the admin port (NPM_ADMIN_PORT, default 81) in your browser. On a
+  fresh install you are asked to create the first administrator account.
+  If you instead see a login form, use the legacy defaults
+  admin@example.com / changeme and change them immediately.
+
+  Ports 80 and 443 (NPM_HTTP_PORT / NPM_HTTPS_PORT) must be free on the host
+  and reachable from the internet if you want Let's Encrypt HTTP challenges
+  to work. Do not expose the admin port publicly.
+
+  The first start can log database connection errors for a few seconds while
+  MariaDB initializes; Nginx Proxy Manager retries until it is ready.

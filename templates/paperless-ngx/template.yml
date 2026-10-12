@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Paperless-ngx
+description: A document management system that scans, indexes and archives your paper documents
+category: Productivity
+icon: icon.svg

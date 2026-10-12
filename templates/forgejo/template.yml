@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Forgejo
+description: A community-driven, lightweight self-hosted Git forge
+category: Development
+icon: icon.svg

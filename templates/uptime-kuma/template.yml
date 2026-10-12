@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Uptime Kuma
+description: A self-hosted monitoring tool for uptime and status pages
+category: Monitoring
+icon: icon.svg

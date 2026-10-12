@@ -1,0 +1,15 @@
+services:
+  authelia:
+    image: authelia/authelia:4.39.28
+    restart: unless-stopped
+    ports:
+      - "${AUTH_PORT}:9091"
+    environment:
+      - TZ=${TZ}
+      - X_AUTHELIA_CONFIG_FILTERS=template
+      - AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET=${AUTH_JWT_SECRET}
+      - AUTHELIA_SESSION_SECRET=${AUTH_SESSION_SECRET}
+      - AUTHELIA_STORAGE_ENCRYPTION_KEY=${AUTH_STORAGE_ENCRYPTION_KEY}
+    env_file: .env
+    volumes:
+      - ./config:/config

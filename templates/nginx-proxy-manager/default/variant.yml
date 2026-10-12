@@ -1,0 +1,14 @@
+name: Default
+description: Nginx Proxy Manager with its built-in SQLite database
+usage: |
+  Open the admin port (NPM_ADMIN_PORT, default 81) in your browser. On a
+  fresh install you are asked to create the first administrator account.
+  If you instead see a login form, use the legacy defaults
+  admin@example.com / changeme and change them immediately.
+
+  Ports 80 and 443 (NPM_HTTP_PORT / NPM_HTTPS_PORT) must be free on the host
+  and reachable from the internet if you want Let's Encrypt HTTP challenges
+  to work. Do not expose the admin port publicly.
+
+  This variant uses SQLite stored under ./volumes/data. Use the with-mariadb
+  variant if you want an external SQL database.

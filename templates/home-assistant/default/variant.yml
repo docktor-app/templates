@@ -1,0 +1,17 @@
+name: Default
+description: Home Assistant Container running on the host network
+usage: |
+  This stack uses network_mode: host (without privileged mode). Home
+  Assistant needs it to discover devices on your LAN via mDNS/SSDP/UPnP
+  and to receive broadcasts from smart-home gear. Because of this there is
+  no port mapping: the web UI is always on port 8123 of the Docker host,
+  i.e. http://<host-ip>:8123. Make sure nothing else on the host uses 8123.
+
+  Open that URL and create the first (owner) account - there are no default
+  credentials. All configuration lives in ./volumes/config.
+
+  Host networking works on Linux hosts only (not Docker Desktop on
+  Windows/macOS). USB dongles (Zigbee, Z-Wave) are not passed through in
+  this template; run zigbee2mqtt as a separate stack and connect via MQTT.
+
+  Set TZ in .env to your time zone.

@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Pi-hole
+description: A network-wide DNS sinkhole that blocks ads and trackers
+category: Networking
+icon: icon.svg

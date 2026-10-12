@@ -1,0 +1,17 @@
+name: With PostgreSQL
+description: n8n backed by a PostgreSQL container instead of SQLite
+usage: |
+  Before the first start, set N8N_ENCRYPTION_KEY (e.g. openssl rand -hex 32)
+  and POSTGRES_PASSWORD in .env. Keep a backup of the encryption key,
+  losing it makes stored credentials unreadable. Change the Postgres
+  password before the first start; afterwards it is stored in the database.
+
+  Open the published port in your browser and create the owner account on
+  first visit - there are no default credentials.
+
+  N8N_SECURE_COOKIE=false allows logging in over plain HTTP on a LAN. Set it
+  to true once n8n is served over HTTPS.
+
+  Workflows and executions are stored in PostgreSQL (./volumes/postgres);
+  n8n's own files are in ./volumes/data (run chown -R 1000:1000
+  ./volumes/data on permission errors).

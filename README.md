@@ -79,7 +79,45 @@ for the full format reference, size limits, and rejection rules.
 
 ## Templates in this repository
 
-| Template | Variants |
-|---|---|
-| [`nextcloud`](templates/nextcloud) | `default`, `with-redis`, `behind-proxy` |
-| [`immich`](templates/immich) | `default`, `with-external-postgres` |
+| Category | Template | Variants |
+|---|---|---|
+| Productivity | [`memos`](templates/memos) | `default` |
+| Productivity | [`nextcloud`](templates/nextcloud) | `default`, `behind-proxy`, `with-redis` |
+| Productivity | [`paperless-ngx`](templates/paperless-ngx) | `default`, `with-tika-gotenberg` |
+| Productivity | [`stirling-pdf`](templates/stirling-pdf) | `default` |
+| Productivity | [`vikunja`](templates/vikunja) | `default`, `with-postgres` |
+| Media | [`audiobookshelf`](templates/audiobookshelf) | `default` |
+| Media | [`calibre-web`](templates/calibre-web) | `default` |
+| Media | [`immich`](templates/immich) | `default`, `with-external-postgres` |
+| Media | [`jellyfin`](templates/jellyfin) | `default`, `with-hw-transcoding` |
+| Media | [`navidrome`](templates/navidrome) | `default` |
+| Media Automation | [`arr-stack`](templates/arr-stack) | `default` |
+| Media Automation | [`jellyseerr`](templates/jellyseerr) | `default` |
+| Networking | [`adguard-home`](templates/adguard-home) | `default` |
+| Networking | [`caddy`](templates/caddy) | `default` |
+| Networking | [`cloudflared`](templates/cloudflared) | `default` |
+| Networking | [`nginx-proxy-manager`](templates/nginx-proxy-manager) | `default`, `with-mariadb` |
+| Networking | [`pihole`](templates/pihole) | `default` |
+| Networking | [`wireguard-easy`](templates/wireguard-easy) | `default` |
+| Monitoring | [`beszel`](templates/beszel) | `default` |
+| Monitoring | [`grafana-loki`](templates/grafana-loki) | `default` |
+| Monitoring | [`grafana-prometheus`](templates/grafana-prometheus) | `default` |
+| Monitoring | [`uptime-kuma`](templates/uptime-kuma) | `default` |
+| Development | [`code-server`](templates/code-server) | `default` |
+| Development | [`forgejo`](templates/forgejo) | `default`, `with-postgres` |
+| Development | [`gitea`](templates/gitea) | `default`, `with-postgres` |
+| Home & IoT | [`mosquitto`](templates/mosquitto) | `default` |
+| Home & IoT | [`home-assistant`](templates/home-assistant) | `default` |
+| Home & IoT | [`node-red`](templates/node-red) | `default` |
+| Home & IoT | [`zigbee2mqtt`](templates/zigbee2mqtt) | `default` |
+| Content & Web | [`ghost`](templates/ghost) | `default`, `with-mysql` |
+| Content & Web | [`homepage`](templates/homepage) | `default` |
+| Content & Web | [`linkding`](templates/linkding) | `default` |
+| Content & Web | [`mealie`](templates/mealie) | `default` |
+| Content & Web | [`wordpress`](templates/wordpress) | `default`, `with-redis` |
+| Auth & Security | [`authelia`](templates/authelia) | `default` |
+| Auth & Security | [`authentik`](templates/authentik) | `default` |
+| Auth & Security | [`vaultwarden`](templates/vaultwarden) | `default`, `with-postgres` |
+| Automation & AI | [`n8n`](templates/n8n) | `default`, `with-postgres` |
+| Automation & AI | [`ollama-open-webui`](templates/ollama-open-webui) | `default`, `with-gpu` |
+| Automation & AI | [`syncthing`](templates/syncthing) | `default` |

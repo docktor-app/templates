@@ -1,0 +1,29 @@
+name: Default
+description: Sonarr, Radarr, Prowlarr, and qBittorrent sharing one hardlink-friendly data layout
+usage: |
+  Web UIs (default ports): Sonarr 8989, Radarr 7878, Prowlarr 9696,
+  qBittorrent 8080 (see the *_PORT variables in .env).
+
+  Shared data layout under ./volumes/data (mounted as /data in the containers):
+    /data/torrents          qBittorrent downloads
+    /data/media/tv          Sonarr library
+    /data/media/movies      Radarr library
+  Create these folders before starting (mkdir -p ./volumes/data/torrents
+  ./volumes/data/media/tv ./volumes/data/media/movies) and make them owned by
+  PUID:PGID. Because everything lives under one /data mount, Sonarr and Radarr
+  can hardlink finished downloads instead of copying them. Point your media
+  server (Jellyfin, Plex) at ./volumes/data/media.
+
+  Setup:
+  1. qBittorrent: the first-start admin password is printed in the container
+     logs (username admin). Change it under Tools > Options > Web UI, and set
+     the default save path to /data/torrents.
+  2. Sonarr / Radarr: Settings > Download Clients > add qBittorrent with host
+     qbittorrent and port 8080. Add root folders /data/media/tv and
+     /data/media/movies. Enable hardlinks under Media Management.
+  3. Prowlarr: add your indexers, then Settings > Apps to connect Sonarr
+     (http://sonarr:8989) and Radarr (http://radarr:7878) using the API keys
+     from their Settings > General pages.
+
+  No VPN or reverse proxy is included. Do not expose these UIs directly to
+  the internet.

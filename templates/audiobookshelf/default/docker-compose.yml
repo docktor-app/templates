@@ -1,0 +1,15 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:2.37.1
+    restart: unless-stopped
+    user: "${PUID:-1000}:${PGID:-1000}"
+    ports:
+      - "${AUDIOBOOKSHELF_PORT:-13378}:80"
+    environment:
+      - TZ=${TZ:-Etc/UTC}
+    env_file: .env
+    volumes:
+      - ./volumes/audiobooks:/audiobooks
+      - ./volumes/podcasts:/podcasts
+      - ./volumes/config:/config
+      - ./volumes/metadata:/metadata

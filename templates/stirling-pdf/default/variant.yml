@@ -1,0 +1,13 @@
+name: Default
+description: Stirling PDF as a single container, no login required
+usage: |
+  Open the published port in your browser — all tools are available right
+  away, there is no login by default. Files are processed in the container
+  and are not kept after the request completes.
+
+  Because anyone who can reach the port can use it, keep it on a trusted
+  network or behind a reverse proxy with authentication.
+
+  Settings and any extra OCR language data persist in ./volumes/configs and
+  ./volumes/tessdata. Set LANGS in .env to change the UI language (e.g.
+  en_GB, de_DE).

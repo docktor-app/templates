@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: authentik
+description: An open-source identity provider with SSO, MFA and flexible flows
+category: Auth & Security
+icon: icon.svg

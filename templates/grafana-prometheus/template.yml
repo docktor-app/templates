@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Grafana + Prometheus
+description: Grafana dashboards with a Prometheus metrics database and node-exporter
+category: Monitoring
+icon: icon.svg

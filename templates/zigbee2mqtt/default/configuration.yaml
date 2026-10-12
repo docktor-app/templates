@@ -1,0 +1,18 @@
+# Zigbee2MQTT base configuration (mounted into the container).
+# MQTT server/user/password are overridden by the MQTT_* values in .env.
+version: 4
+homeassistant:
+  enabled: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto:1883
+serial:
+  port: /dev/ttyACM0
+frontend:
+  enabled: true
+  port: 8080
+advanced:
+  log_level: info
+  network_key: GENERATE
+  pan_id: GENERATE
+  ext_pan_id: GENERATE

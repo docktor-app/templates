@@ -1,0 +1,13 @@
+name: Default
+description: Jellyfin media server with software transcoding
+usage: |
+  Open the published port (JELLYFIN_PORT, default 8096) in your browser and
+  follow the setup wizard to create the admin account.
+
+  Put your media in ./volumes/media (or replace that bind mount with the path
+  to your existing library) and add it as a library in the wizard; it is
+  available inside the container under /media.
+
+  The container runs as PUID:PGID from .env, so the ./volumes directories and
+  your media must be readable by that user. Transcoding runs on the CPU; use
+  the with-hw-transcoding variant for GPU acceleration.

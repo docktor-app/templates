@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Authelia
+description: A self-hosted authentication and authorization server with 2FA and SSO for reverse proxies
+category: Auth & Security
+icon: icon.svg

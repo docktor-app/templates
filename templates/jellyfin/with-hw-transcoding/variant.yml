@@ -1,0 +1,15 @@
+name: With hardware transcoding
+description: Jellyfin with the host GPU (/dev/dri) passed through for VAAPI/QSV transcoding
+usage: |
+  Passes the host /dev/dri device into the container (no privileged mode)
+  so Jellyfin can use Intel/AMD GPUs for hardware transcoding.
+
+  Set RENDER_GID in .env to the host render group ID
+  (getent group render | cut -d: -f3), otherwise the container user cannot
+  open the render device.
+
+  After the first-run wizard, go to Dashboard > Playback > Transcoding, pick
+  VAAPI (or Intel QuickSync) and set the device to /dev/dri/renderD128.
+
+  NVIDIA GPUs need the NVIDIA container toolkit and a different setup; this
+  variant targets Intel and AMD.

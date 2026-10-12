@@ -1,0 +1,5 @@
+- Services:
+    - Example App:
+        href: http://localhost:8080
+        description: Replace this with one of your own services
+        icon: mdi-server

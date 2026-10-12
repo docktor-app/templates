@@ -1,0 +1,16 @@
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:4.141.0
+    restart: unless-stopped
+    ports:
+      - "${CODE_SERVER_PORT}:8443"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PASSWORD=${PASSWORD}
+      - DEFAULT_WORKSPACE=/config/workspace
+    env_file: .env
+    volumes:
+      - ./volumes/config:/config
+      - ./volumes/workspace:/config/workspace

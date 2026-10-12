@@ -1,0 +1,12 @@
+services:
+  stirling-pdf:
+    image: ghcr.io/stirling-tools/stirling-pdf:3.1.0
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    env_file: .env
+    environment:
+      - LANGS=${LANGS:-en_GB}
+    volumes:
+      - ./volumes/configs:/configs
+      - ./volumes/tessdata:/usr/share/tessdata

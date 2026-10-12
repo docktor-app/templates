@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Jellyseerr
+description: A request management and media discovery tool for Jellyfin, Plex, and Emby
+category: Media Automation
+icon: icon.svg

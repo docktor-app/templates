@@ -1,0 +1,14 @@
+name: With Postgres
+description: Vikunja backed by a dedicated Postgres database
+usage: |
+  Open the published port in your browser and use "Register" to create your
+  account — there is no default login.
+
+  Set VIKUNJA_SERVICE_PUBLICURL in .env to the URL you reach Vikunja at, and
+  change DB_PASSWORD and VIKUNJA_SERVICE_JWTSECRET (a long random string)
+  before the first start. Set VIKUNJA_SERVICE_ENABLEREGISTRATION=false once
+  your accounts exist.
+
+  Vikunja runs as UID 1000. If it fails to write to ./volumes/files, run:
+  chown -R 1000:1000 volumes/files. Back up ./volumes/postgres and
+  ./volumes/files.

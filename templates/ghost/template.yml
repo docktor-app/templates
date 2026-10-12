@@ -1,0 +1,5 @@
+schemaVersion: 1
+name: Ghost
+description: A modern publishing platform for blogs and newsletters
+category: Content & Web
+icon: icon.svg

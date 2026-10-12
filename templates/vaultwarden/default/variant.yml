@@ -1,0 +1,18 @@
+name: Default
+description: Vaultwarden with its built-in SQLite database — a single container
+usage: |
+  Open the published port in your browser and create your account — the
+  first account you register is a normal user, there is no default login.
+  Bitwarden clients (browser extension, mobile, desktop) work by setting the
+  server URL to this instance.
+
+  IMPORTANT: Bitwarden clients and the web vault require HTTPS (except on
+  localhost). Put Vaultwarden behind a reverse proxy with TLS and set DOMAIN
+  in .env to the public https:// URL.
+
+  Set ADMIN_TOKEN in .env to enable the /admin panel (use a long random
+  string; leave it empty to keep the panel disabled). After creating your
+  accounts, set SIGNUPS_ALLOWED=false and redeploy to stop public sign-ups.
+
+  Data (SQLite database, attachments, keys) lives in ./volumes/data — back
+  it up.
