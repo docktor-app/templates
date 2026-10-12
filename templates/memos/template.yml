@@ -2,4 +2,4 @@ schemaVersion: 1
 name: Memos
 description: A privacy-first, lightweight note-taking service for quick capture
 category: Productivity
-icon: icon.svg
+icon: memos.png
