@@ -9,8 +9,6 @@ services:
       - VIKUNJA_SERVICE_PUBLICURL=${VIKUNJA_SERVICE_PUBLICURL}
       - VIKUNJA_SERVICE_SECRET=${VIKUNJA_SERVICE_SECRET}
       - VIKUNJA_SERVICE_ENABLEREGISTRATION=${VIKUNJA_SERVICE_ENABLEREGISTRATION:-true}
-      - VIKUNJA_DATABASE_TYPE=sqlite
-      - VIKUNJA_DATABASE_PATH=/db/vikunja.db
     volumes:
       - ./volumes/files:/app/vikunja/files
       - ./volumes/db:/db

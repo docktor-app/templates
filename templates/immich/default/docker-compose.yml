@@ -5,11 +5,9 @@ services:
     ports:
       - "2283:2283"
     environment:
-      - DB_HOSTNAME=database
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE_NAME=${DB_DATABASE_NAME}
-      - REDIS_HOSTNAME=redis
     env_file: .env
     volumes:
       - ./volumes/upload:/data
@@ -44,7 +42,6 @@ services:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_DATABASE_NAME}
-      - POSTGRES_INITDB_ARGS=--data-checksums
     env_file: .env
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data

@@ -6,7 +6,6 @@ services:
       - "${WG_PORT}:51820/udp"
       - "${WG_UI_PORT}:51821/tcp"
     environment:
-      - INIT_ENABLED=true
       - INIT_USERNAME=${WG_ADMIN_USER}
       - INIT_PASSWORD=${WG_ADMIN_PASSWORD}
       - INIT_HOST=${WG_HOST}

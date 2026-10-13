@@ -5,8 +5,6 @@ services:
     ports:
       - "${NEXTCLOUD_PORT:-8080}:80"
     env_file: .env
-    environment:
-      - SQLITE_DATABASE=nextcloud
     volumes:
       - ./volumes/html:/var/www/html
 

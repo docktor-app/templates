@@ -9,7 +9,6 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - PASSWORD=${PASSWORD}
-      - DEFAULT_WORKSPACE=/config/workspace
     env_file: .env
     volumes:
       - ./volumes/config:/config

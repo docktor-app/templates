@@ -9,7 +9,6 @@ services:
     environment:
       - TZ=${TZ}
       - FTLCONF_webserver_api_password=${PIHOLE_ADMIN_PASSWORD}
-      - FTLCONF_dns_listeningMode=ALL
     env_file: .env
     volumes:
       - ./volumes/etc-pihole:/etc/pihole

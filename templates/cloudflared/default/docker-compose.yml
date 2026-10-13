@@ -5,7 +5,6 @@ services:
     command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
-      - TUNNEL_METRICS=127.0.0.1:2000
     env_file: .env
     healthcheck:
       test: ["CMD", "cloudflared", "tunnel", "ready"]

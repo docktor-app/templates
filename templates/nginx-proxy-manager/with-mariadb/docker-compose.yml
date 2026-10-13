@@ -7,8 +7,6 @@ services:
       - "${NPM_HTTPS_PORT}:443"
       - "${NPM_ADMIN_PORT}:81"
     environment:
-      - DB_MYSQL_HOST=db
-      - DB_MYSQL_PORT=3306
       - DB_MYSQL_USER=${MYSQL_USER}
       - DB_MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - DB_MYSQL_NAME=${MYSQL_DATABASE}

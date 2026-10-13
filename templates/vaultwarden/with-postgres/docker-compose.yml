@@ -9,7 +9,6 @@ services:
       - DOMAIN=${DOMAIN}
       - ADMIN_TOKEN=${ADMIN_TOKEN}
       - SIGNUPS_ALLOWED=${SIGNUPS_ALLOWED:-true}
-      - DATABASE_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_DATABASE_NAME}
     volumes:
       - ./volumes/data:/data
     depends_on:

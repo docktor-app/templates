@@ -6,9 +6,6 @@ services:
       - "${APP_PORT:-8000}:8000"
     env_file: .env
     environment:
-      - PAPERLESS_REDIS=redis://broker:6379
-      - PAPERLESS_DBENGINE=postgresql
-      - PAPERLESS_DBHOST=db
       - PAPERLESS_DBNAME=${DB_DATABASE_NAME}
       - PAPERLESS_DBUSER=${DB_USERNAME}
       - PAPERLESS_DBPASS=${DB_PASSWORD}

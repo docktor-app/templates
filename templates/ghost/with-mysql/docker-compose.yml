@@ -6,9 +6,6 @@ services:
       - "${GHOST_PORT}:2368"
     environment:
       - url=${GHOST_URL}
-      - NODE_ENV=production
-      - database__client=mysql
-      - database__connection__host=db
       - database__connection__user=${MYSQL_USER}
       - database__connection__password=${MYSQL_PASSWORD}
       - database__connection__database=${MYSQL_DATABASE}
