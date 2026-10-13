@@ -1,0 +1,19 @@
+name: MariaDB
+description: Same stack as Default, but with MariaDB instead of PostgreSQL
+usage: |
+  Services: app (Apache), cron, MariaDB (READ-COMMITTED isolation as
+  Nextcloud requires) and Redis (password protected).
+
+  Before deploying, change all passwords in .env and list every hostname or
+  IP you will open Nextcloud with in NEXTCLOUD_TRUSTED_DOMAINS (space
+  separated).
+
+  The first start installs Nextcloud into ./volumes/html and can take a few
+  minutes. Then open the published port and log in with
+  NEXTCLOUD_ADMIN_USER / NEXTCLOUD_ADMIN_PASSWORD.
+
+  Afterwards set Administration settings > Basic settings > Background jobs
+  to "Cron" — the cron container already runs the job every 5 minutes.
+
+  Redis logs "Memory overcommit must be enabled" on some Linux hosts. Fix it
+  on the host with sudo sysctl vm.overcommit_memory=1.

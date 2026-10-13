@@ -1,0 +1,14 @@
+name: SQLite (minimal)
+description: Nextcloud with the bundled SQLite database and a cron container — for trying it out
+usage: |
+  No external database and no Redis: just Nextcloud and its cron container.
+  SQLite is fine for a single user or a quick test, but does not scale and
+  Nextcloud will show a "no memory cache configured" notice. Use the
+  default variant for anything you intend to keep.
+
+  List every hostname or IP you will open Nextcloud with in
+  NEXTCLOUD_TRUSTED_DOMAINS (space separated), then open the published port
+  and log in with NEXTCLOUD_ADMIN_USER / NEXTCLOUD_ADMIN_PASSWORD from .env.
+
+  Afterwards set Administration settings > Basic settings > Background jobs
+  to "Cron".

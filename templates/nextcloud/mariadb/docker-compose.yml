@@ -1,0 +1,67 @@
+services:
+  db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    env_file: .env
+    environment:
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+    volumes:
+      - ./volumes/db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:8.8.3-alpine
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - REDISCLI_AUTH=${REDIS_HOST_PASSWORD}
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_HOST_PASSWORD}"]
+    configs:
+      - source: redis-conf
+        target: /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./volumes/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: nextcloud:35-apache
+    restart: unless-stopped
+    ports:
+      - "${NEXTCLOUD_PORT:-8080}:80"
+    env_file: .env
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+    volumes:
+      - ./volumes/html:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  cron:
+    image: nextcloud:35-apache
+    restart: unless-stopped
+    entrypoint: /cron.sh
+    env_file: .env
+    volumes:
+      - ./volumes/html:/var/www/html
+    depends_on:
+      - app
+
+configs:
+  redis-conf:
+    content: |
+      save 60 1
+      loglevel notice

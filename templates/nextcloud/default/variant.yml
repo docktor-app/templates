@@ -1,11 +1,24 @@
 name: Default
-description: A single Nextcloud container with SQLite — good for trying it out
+description: Nextcloud with PostgreSQL, Redis caching/locking and a background-jobs (cron) container
 usage: |
-  Open the published port in your browser and complete the first-run setup
-  wizard using the admin credentials from .env (NEXTCLOUD_ADMIN_USER /
-  NEXTCLOUD_ADMIN_PASSWORD).
+  Recommended setup, modelled on the official nextcloud/docker examples.
+  Services: app (Apache), cron, PostgreSQL and Redis (password protected).
 
-  This variant uses Nextcloud's bundled SQLite database, which is fine for
-  personal use but does not scale well with many files or users. Switch to
-  the with-redis variant (or point it at an external database) if you outgrow
-  it.
+  Before deploying, change the passwords in .env and list every hostname or
+  IP you will open Nextcloud with in NEXTCLOUD_TRUSTED_DOMAINS (space
+  separated), otherwise logins are rejected as an "untrusted domain".
+
+  The first start copies Nextcloud into ./volumes/html and runs the install,
+  which can take a few minutes. Then open the published port and log in with
+  NEXTCLOUD_ADMIN_USER / NEXTCLOUD_ADMIN_PASSWORD from .env.
+
+  Once logged in:
+    1. Administration settings > Basic settings > Background jobs: pick
+       "Cron". The cron container already runs the job every 5 minutes.
+    2. To silence the "default phone region" notice, run:
+       docker compose exec -u www-data app php occ config:system:set default_phone_region --value=DE
+       (use your own ISO country code).
+
+  Redis logs "Memory overcommit must be enabled" on some Linux hosts. That is
+  a host setting, not a container one: run
+  sudo sysctl vm.overcommit_memory=1 (and persist it in /etc/sysctl.conf).

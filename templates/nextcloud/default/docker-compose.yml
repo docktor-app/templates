@@ -1,12 +1,63 @@
 services:
-  nextcloud:
-    image: nextcloud:28
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./volumes/db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:8.8.3-alpine
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - REDISCLI_AUTH=${REDIS_HOST_PASSWORD}
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_HOST_PASSWORD}"]
+    configs:
+      - source: redis-conf
+        target: /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./volumes/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: nextcloud:35-apache
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "${NEXTCLOUD_PORT:-8080}:80"
+    env_file: .env
     environment:
-      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER}
-      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}
+      - POSTGRES_HOST=db
+      - REDIS_HOST=redis
+    volumes:
+      - ./volumes/html:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  cron:
+    image: nextcloud:35-apache
+    restart: unless-stopped
+    entrypoint: /cron.sh
     env_file: .env
     volumes:
       - ./volumes/html:/var/www/html
+    depends_on:
+      - app
+
+configs:
+  redis-conf:
+    content: |
+      save 60 1
+      loglevel notice

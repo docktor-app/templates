@@ -1,24 +1,85 @@
 services:
-  nextcloud:
-    image: nextcloud:28
+  db:
+    image: postgres:17-alpine
     restart: unless-stopped
-    environment:
-      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_ADMIN_USER}
-      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_ADMIN_PASSWORD}
-      - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_DOMAIN}
-      - OVERWRITEPROTOCOL=https
     env_file: .env
     volumes:
+      - ./volumes/db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:8.8.3-alpine
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - REDISCLI_AUTH=${REDIS_HOST_PASSWORD}
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_HOST_PASSWORD}"]
+    configs:
+      - source: redis-conf
+        target: /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./volumes/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: nextcloud:35-apache
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - POSTGRES_HOST=db
+      - REDIS_HOST=redis
+      - NEXTCLOUD_TRUSTED_DOMAINS=${NEXTCLOUD_DOMAIN}
+      - OVERWRITEHOST=${NEXTCLOUD_DOMAIN}
+      - OVERWRITEPROTOCOL=https
+      - OVERWRITECLIURL=https://${NEXTCLOUD_DOMAIN}
+    volumes:
       - ./volumes/html:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
+      - default
       - proxy
     labels:
       - traefik.enable=true
+      - traefik.docker.network=proxy
       - traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_DOMAIN}`)
       - traefik.http.routers.nextcloud.entrypoints=websecure
       - traefik.http.routers.nextcloud.tls.certresolver=letsencrypt
+      - traefik.http.routers.nextcloud.middlewares=nextcloud-dav,nextcloud-headers
       - traefik.http.services.nextcloud.loadbalancer.server.port=80
+      - traefik.http.middlewares.nextcloud-dav.redirectregex.regex=^https://([^/]+)/.well-known/(?:card|cal)dav
+      - traefik.http.middlewares.nextcloud-dav.redirectregex.replacement=https://$${1}/remote.php/dav
+      - traefik.http.middlewares.nextcloud-dav.redirectregex.permanent=true
+      - traefik.http.middlewares.nextcloud-headers.headers.stsSeconds=15552000
+      - traefik.http.middlewares.nextcloud-headers.headers.stsIncludeSubdomains=true
+
+  cron:
+    image: nextcloud:35-apache
+    restart: unless-stopped
+    entrypoint: /cron.sh
+    env_file: .env
+    volumes:
+      - ./volumes/html:/var/www/html
+    depends_on:
+      - app
 
 networks:
   proxy:
     external: true
+
+configs:
+  redis-conf:
+    content: |
+      save 60 1
+      loglevel notice
