@@ -4,8 +4,11 @@ usage: |
   Open the published port in your browser and create the admin account on
   first visit. Uptime Kuma has no default credentials.
 
-  Add monitors (HTTP, TCP, ping, DNS, Docker, ...) from the dashboard and
+  Add monitors (HTTP, TCP, ping, DNS, ...) from the dashboard and
   optionally publish a public status page. Notification channels (email,
   Telegram, Discord, ...) are configured under Settings > Notifications.
+
+  Docker container monitors need access to the Docker socket, which this
+  template deliberately does not mount.
 
   All data lives in ./volumes/data.

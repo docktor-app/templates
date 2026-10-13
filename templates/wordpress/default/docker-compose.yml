@@ -13,7 +13,8 @@ services:
     volumes:
       - ./volumes/html:/var/www/html
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mariadb:11.8
@@ -26,3 +27,9 @@ services:
     env_file: .env
     volumes:
       - ./volumes/db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

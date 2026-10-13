@@ -1,5 +1,5 @@
 name: Default
-description: authentik server and worker with Postgres and Redis
+description: authentik server and worker with PostgreSQL
 usage: |
   Before the FIRST start, edit .env:
     - AUTHENTIK_SECRET_KEY: generate with   openssl rand -base64 60 | tr -d '\n'
@@ -13,9 +13,16 @@ usage: |
   http://<host>:<AUTHENTIK_PORT_HTTP>/if/flow/initial-setup/ instead. The
   bootstrap variables only take effect on the very first start.
 
-  The image is pinned to 2025.8.x, the last release line that uses Redis.
-  Newer authentik versions removed Redis; if you upgrade, follow the
-  authentik release notes and drop the redis service.
+  The image is pinned to the 2026.8 release line. Current authentik
+  releases no longer use Redis (everything runs on PostgreSQL), so there is
+  no redis service. Uploaded media lives in ./volumes/data. The official
+  compose file also mounts the Docker socket into the worker for the local
+  Docker integration; this template leaves that out. Add outposts manually
+  (or via a remote integration) if you need them.
+
+  Upgrading from the old 2025.8 template: authentik must be upgraded one
+  release at a time and media moved to ./volumes/data/media; follow the
+  release notes.
 
   Put authentik behind a TLS reverse proxy for real use; the HTTPS port
   (AUTHENTIK_PORT_HTTPS) uses a self-signed certificate.

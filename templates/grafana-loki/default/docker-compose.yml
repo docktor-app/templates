@@ -12,8 +12,15 @@ services:
     volumes:
       - ./volumes/grafana:/var/lib/grafana
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     depends_on:
-      - loki
+      loki:
+        condition: service_healthy
 
   loki:
     image: grafana/loki:3.7.8
@@ -26,16 +33,27 @@ services:
     volumes:
       - ./loki.yml:/etc/loki/loki.yml:ro
       - ./volumes/loki:/loki
+    healthcheck:
+      test: ["CMD", "/usr/bin/loki", "-health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
-  promtail:
-    image: grafana/promtail:3.6.11
+  alloy:
+    image: grafana/alloy:v1.20.1
     restart: unless-stopped
     user: "0:0"
-    command: -config.file=/etc/promtail/promtail.yml
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
     env_file: .env
     volumes:
-      - ./promtail.yml:/etc/promtail/promtail.yml:ro
+      - ./config.alloy:/etc/alloy/config.alloy:ro
       - /var/log:/var/log:ro
-      - ./volumes/promtail:/positions
+      - ./volumes/alloy:/var/lib/alloy/data
     depends_on:
-      - loki
+      loki:
+        condition: service_healthy

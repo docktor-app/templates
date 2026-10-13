@@ -10,6 +10,10 @@ usage: |
   admin account. Ghost has no default credentials; the first account you
   create becomes the owner.
 
+  Sending email (staff invites, password resets, newsletters) requires a
+  mail provider; set the mail__* environment variables (see the Ghost
+  config docs) in .env.
+
   The database passwords are only applied the first time MySQL initialises
   ./volumes/mysql; changing them in .env afterwards will not update the
   existing database users.

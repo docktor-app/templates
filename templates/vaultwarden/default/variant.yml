@@ -10,9 +10,13 @@ usage: |
   localhost). Put Vaultwarden behind a reverse proxy with TLS and set DOMAIN
   in .env to the public https:// URL.
 
-  Set ADMIN_TOKEN in .env to enable the /admin panel (use a long random
-  string; leave it empty to keep the panel disabled). After creating your
-  accounts, set SIGNUPS_ALLOWED=false and redeploy to stop public sign-ups.
+  Set ADMIN_TOKEN in .env to enable the /admin panel (leave it empty to keep
+  the panel disabled). Prefer an Argon2 hash over plain text, which logs a
+  warning: generate one with
+  `docker run --rm -it vaultwarden/server:1.37.4 /vaultwarden hash` and put
+  it in .env wrapped in single quotes, e.g. ADMIN_TOKEN='$argon2id$...'.
+  After creating your accounts, set SIGNUPS_ALLOWED=false and redeploy to
+  stop public sign-ups.
 
   Data (SQLite database, attachments, keys) lives in ./volumes/data — back
   it up.

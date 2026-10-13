@@ -6,6 +6,7 @@ services:
       - "${GHOST_PORT}:2368"
     environment:
       - url=${GHOST_URL}
+      - NODE_ENV=production
       - database__client=mysql
       - database__connection__host=db
       - database__connection__user=${MYSQL_USER}
@@ -15,7 +16,8 @@ services:
     volumes:
       - ./volumes/content:/var/lib/ghost/content
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:8.4.11
@@ -28,3 +30,9 @@ services:
     env_file: .env
     volumes:
       - ./volumes/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s

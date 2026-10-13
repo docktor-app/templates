@@ -1,0 +1,19 @@
+name: Host network
+description: Syncthing on the host network, as recommended upstream for reliable LAN discovery and transfers
+usage: |
+  Upstream strongly recommends host networking: in Docker's default bridge
+  network Syncthing only sees the container's internal IP, so devices on
+  your LAN cannot find each other and may fall back to slow relayed
+  connections. This variant has no port mappings; Syncthing listens directly
+  on the Docker host (Linux only, not Docker Desktop on Windows/macOS):
+  GUI 8384/tcp, sync 22000/tcp+udp, local discovery 21027/udp. Make sure
+  nothing else on the host uses these ports.
+
+  Open http://<host-ip>:8384. The GUI is unprotected on first start:
+  immediately set a GUI username and password under Actions -> Settings ->
+  GUI, otherwise anyone on your network can control Syncthing.
+
+  Synced folders live in ./volumes/data (mounted at /var/syncthing/Sync in
+  the container; use that path when adding folders). Configuration and the
+  device identity are in ./volumes/config. PUID/PGID in .env set the file
+  owner of synced files.

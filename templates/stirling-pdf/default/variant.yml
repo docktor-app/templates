@@ -1,13 +1,17 @@
 name: Default
-description: Stirling PDF as a single container, no login required
+description: Stirling PDF as a single container with login enabled
 usage: |
-  Open the published port in your browser — all tools are available right
-  away, there is no login by default. Files are processed in the container
-  and are not kept after the request completes.
+  Open the published port in your browser and log in with the initial
+  credentials from .env (SECURITY_INITIALLOGIN_USERNAME / _PASSWORD). If you
+  clear them, Stirling PDF falls back to its built-in default login
+  admin / stirling. Change the password when prompted after the first login.
 
-  Because anyone who can reach the port can use it, keep it on a trusted
-  network or behind a reverse proxy with authentication.
+  The initial credentials are only used to create the first admin account.
+  To run without any login (trusted network only), set
+  SECURITY_ENABLELOGIN=false in .env and redeploy.
 
-  Settings and any extra OCR language data persist in ./volumes/configs and
-  ./volumes/tessdata. Set LANGS in .env to change the UI language (e.g.
-  en_GB, de_DE).
+  Settings live in ./volumes/configs, logs in ./volumes/logs, and extra OCR
+  language data in ./volumes/tessdata (drop *.traineddata files there). Set
+  SYSTEM_DEFAULTLOCALE in .env to change the default UI language (e.g.
+  en-GB, de-DE). The container is large (LibreOffice, OCR) - give it about
+  4 GB of RAM.

@@ -1,6 +1,6 @@
 services:
   immich-server:
-    image: ghcr.io/immich-app/immich-server:release
+    image: ghcr.io/immich-app/immich-server:v3.3.1
     restart: unless-stopped
     ports:
       - "2283:2283"
@@ -13,19 +13,25 @@ services:
       - REDIS_HOSTNAME=redis
     env_file: .env
     volumes:
-      - ./volumes/upload:/usr/src/app/upload
+      - ./volumes/upload:/data
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
 
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:release
+    image: ghcr.io/immich-app/immich-machine-learning:v3.3.1
     restart: unless-stopped
     env_file: .env
     volumes:
       - ./volumes/model-cache:/cache
 
   redis:
-    image: docker.io/valkey/valkey:8-bookworm
+    image: docker.io/valkey/valkey:9
     restart: unless-stopped
     volumes:
       - ./volumes/redis:/data
+    healthcheck:
+      test: redis-cli ping | grep -q PONG || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5

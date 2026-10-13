@@ -12,6 +12,12 @@ services:
     volumes:
       - ./volumes/config/sonarr:/config
       - ./volumes/data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1:8989/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
   radarr:
     image: lscr.io/linuxserver/radarr:6.4.4
@@ -26,6 +32,12 @@ services:
     volumes:
       - ./volumes/config/radarr:/config
       - ./volumes/data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1:7878/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:2.6.5
@@ -39,6 +51,12 @@ services:
     env_file: .env
     volumes:
       - ./volumes/config/prowlarr:/config
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1:9696/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:5.2.4
@@ -57,3 +75,9 @@ services:
     volumes:
       - ./volumes/config/qbittorrent:/config
       - ./volumes/data/torrents:/data/torrents
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

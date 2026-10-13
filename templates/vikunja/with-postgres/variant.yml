@@ -5,7 +5,7 @@ usage: |
   account — there is no default login.
 
   Set VIKUNJA_SERVICE_PUBLICURL in .env to the URL you reach Vikunja at, and
-  change DB_PASSWORD and VIKUNJA_SERVICE_JWTSECRET (a long random string)
+  change DB_PASSWORD and VIKUNJA_SERVICE_SECRET (a long random string)
   before the first start. Set VIKUNJA_SERVICE_ENABLEREGISTRATION=false once
   your accounts exist.
 

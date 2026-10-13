@@ -10,5 +10,10 @@ usage: |
   An empty folder will not work: create the library with desktop Calibre
   first, or copy an empty metadata.db into the folder.
 
+  Ebook conversion is optional and not enabled: to add it (x86-64 only), set
+  DOCKER_MODS=linuxserver/mods:universal-calibre in .env, then set the
+  converter path to /usr/bin/ under Admin > Basic Configuration > External
+  Binaries.
+
   To enable uploads, turn on "Enable Uploads" in Admin > Edit Basic
   Configuration > Feature Configuration.

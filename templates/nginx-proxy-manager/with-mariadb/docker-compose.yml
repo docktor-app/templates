@@ -17,7 +17,8 @@ services:
       - ./volumes/data:/data
       - ./volumes/letsencrypt:/etc/letsencrypt
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mariadb:11.4.13
@@ -30,3 +31,8 @@ services:
     env_file: .env
     volumes:
       - ./volumes/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

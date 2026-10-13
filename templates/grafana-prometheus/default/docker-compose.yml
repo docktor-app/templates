@@ -12,8 +12,15 @@ services:
     volumes:
       - ./volumes/grafana:/var/lib/grafana
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     depends_on:
-      - prometheus
+      prometheus:
+        condition: service_healthy
 
   prometheus:
     image: prom/prometheus:v3.15.0
@@ -29,6 +36,12 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ./volumes/prometheus:/prometheus
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:9090/-/ready || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
   node-exporter:
     image: prom/node-exporter:v1.12.1

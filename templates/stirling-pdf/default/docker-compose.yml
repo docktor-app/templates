@@ -6,7 +6,14 @@ services:
       - "${APP_PORT:-8080}:8080"
     env_file: .env
     environment:
-      - LANGS=${LANGS:-en_GB}
+      - SECURITY_ENABLELOGIN=${SECURITY_ENABLELOGIN:-true}
+      - SECURITY_INITIALLOGIN_USERNAME=${SECURITY_INITIALLOGIN_USERNAME}
+      - SECURITY_INITIALLOGIN_PASSWORD=${SECURITY_INITIALLOGIN_PASSWORD}
+      - SYSTEM_DEFAULTLOCALE=${SYSTEM_DEFAULTLOCALE:-en-US}
     volumes:
       - ./volumes/configs:/configs
+      - ./volumes/logs:/logs
+      - ./volumes/customFiles:/customFiles
+      - ./volumes/pipeline:/pipeline
+      - ./volumes/storage:/storage
       - ./volumes/tessdata:/usr/share/tessdata

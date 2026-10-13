@@ -6,6 +6,7 @@ services:
       - "${GHOST_PORT}:2368"
     environment:
       - url=${GHOST_URL}
+      - NODE_ENV=development
       - database__client=sqlite3
       - database__connection__filename=/var/lib/ghost/content/data/ghost.db
     env_file: .env

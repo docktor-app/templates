@@ -1,12 +1,13 @@
 services:
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:3.3.0
+    image: ghcr.io/paperless-ngx/paperless-ngx:3.3.1
     restart: unless-stopped
     ports:
       - "${APP_PORT:-8000}:8000"
     env_file: .env
     environment:
       - PAPERLESS_REDIS=redis://broker:6379
+      - PAPERLESS_DBENGINE=postgresql
       - PAPERLESS_DBHOST=db
       - PAPERLESS_DBNAME=${DB_DATABASE_NAME}
       - PAPERLESS_DBUSER=${DB_USERNAME}
@@ -20,16 +21,29 @@ services:
       - ./volumes/export:/usr/src/paperless/export
       - ./volumes/consume:/usr/src/paperless/consume
     depends_on:
-      - db
-      - broker
-      - gotenberg
-      - tika
+      db:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+      gotenberg:
+        condition: service_started
+      tika:
+        condition: service_started
 
   broker:
     image: redis:8.8.3
     restart: unless-stopped
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    configs:
+      - source: redis-conf
+        target: /usr/local/etc/redis/redis.conf
     volumes:
       - ./volumes/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   db:
     image: postgres:17
@@ -41,6 +55,11 @@ services:
     env_file: .env
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   gotenberg:
     image: gotenberg/gotenberg:8.37.0
@@ -48,8 +67,14 @@ services:
     command:
       - "gotenberg"
       - "--chromium-disable-javascript=true"
-      - "--chromium-allow-list=file:///tmp/.*"
+      - "--chromium-allow-list=^file:///tmp/.*"
 
   tika:
     image: apache/tika:4.1.0-1
     restart: unless-stopped
+
+configs:
+  redis-conf:
+    content: |
+      save 60 1
+      loglevel notice

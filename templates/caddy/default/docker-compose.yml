@@ -18,5 +18,5 @@ configs:
   caddyfile:
     content: |
       ${CADDY_DOMAIN} {
-        reverse_proxy ${CADDY_UPSTREAM}
+      	reverse_proxy ${CADDY_UPSTREAM}
       }

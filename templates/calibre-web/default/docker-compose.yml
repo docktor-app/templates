@@ -12,3 +12,9 @@ services:
     volumes:
       - ./volumes/config:/config
       - ./volumes/books:/books
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1:8083/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

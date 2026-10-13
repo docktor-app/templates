@@ -3,6 +3,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:2026.10.1
     restart: unless-stopped
     network_mode: host
+    stop_grace_period: 60s
     environment:
       - TZ=${TZ}
     env_file: .env

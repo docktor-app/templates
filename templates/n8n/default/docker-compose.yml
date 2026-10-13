@@ -9,6 +9,7 @@ services:
       - TZ=${GENERIC_TIMEZONE}
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       - N8N_SECURE_COOKIE=${N8N_SECURE_COOKIE}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
     env_file: .env
     volumes:
       - ./volumes/data:/home/node/.n8n

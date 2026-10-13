@@ -1,5 +1,5 @@
 schemaVersion: 1
 name: Grafana + Loki
-description: Grafana with Loki log storage and Promtail shipping host logs
+description: Grafana with Loki log storage and Grafana Alloy shipping host logs
 category: Monitoring
 icon: icon.svg

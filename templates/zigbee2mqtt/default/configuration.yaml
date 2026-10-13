@@ -1,6 +1,6 @@
 # Zigbee2MQTT base configuration (mounted into the container).
-# MQTT server/user/password are overridden by the MQTT_* values in .env.
-version: 4
+# MQTT server/user/password are overridden by the values in .env.
+version: 5
 homeassistant:
   enabled: false
 mqtt:

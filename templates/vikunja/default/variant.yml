@@ -7,7 +7,7 @@ usage: |
 
   Set VIKUNJA_SERVICE_PUBLICURL in .env to the URL you reach Vikunja at
   (needed for links in emails and for the API), and replace
-  VIKUNJA_SERVICE_JWTSECRET with a long random string before the first start.
+  VIKUNJA_SERVICE_SECRET with a long random string before the first start.
   Set VIKUNJA_SERVICE_ENABLEREGISTRATION=false once your accounts exist.
 
   Vikunja runs as UID 1000. If it fails to write to ./volumes/files or

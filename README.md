@@ -82,7 +82,7 @@ for the full format reference, size limits, and rejection rules.
 | Category | Template | Variants |
 |---|---|---|
 | Productivity | [`memos`](templates/memos) | `default` |
-| Productivity | [`nextcloud`](templates/nextcloud) | `default`, `behind-proxy`, `with-redis` |
+| Productivity | [`nextcloud`](templates/nextcloud) | `default`, `behind-proxy`, `mariadb`, `sqlite` |
 | Productivity | [`paperless-ngx`](templates/paperless-ngx) | `default`, `with-tika-gotenberg` |
 | Productivity | [`stirling-pdf`](templates/stirling-pdf) | `default` |
 | Productivity | [`vikunja`](templates/vikunja) | `default`, `with-postgres` |
@@ -120,4 +120,4 @@ for the full format reference, size limits, and rejection rules.
 | Auth & Security | [`vaultwarden`](templates/vaultwarden) | `default`, `with-postgres` |
 | Automation & AI | [`n8n`](templates/n8n) | `default`, `with-postgres` |
 | Automation & AI | [`ollama-open-webui`](templates/ollama-open-webui) | `default`, `with-gpu` |
-| Automation & AI | [`syncthing`](templates/syncthing) | `default` |
+| Automation & AI | [`syncthing`](templates/syncthing) | `default`, `host-network` |

@@ -8,6 +8,9 @@ usage: |
   to your existing library) and add it as a library in the wizard; it is
   available inside the container under /media.
 
+  UDP port 7359 (JELLYFIN_DISCOVERY_PORT) lets apps on your LAN auto-discover
+  the server; it is optional.
+
   The container runs as PUID:PGID from .env, so the ./volumes directories and
   your media must be readable by that user. Transcoding runs on the CPU; use
   the with-hw-transcoding variant for GPU acceleration.

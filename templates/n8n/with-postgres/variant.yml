@@ -9,6 +9,10 @@ usage: |
   Open the published port in your browser and create the owner account on
   first visit - there are no default credentials.
 
+  If n8n is reachable under another URL (reverse proxy, domain), set
+  WEBHOOK_URL in .env to that public URL so webhook and OAuth callback URLs
+  are shown correctly.
+
   N8N_SECURE_COOKIE=false allows logging in over plain HTTP on a LAN. Set it
   to true once n8n is served over HTTPS.
 

@@ -13,7 +13,8 @@ usage: |
 
   Open the published port to reach the web frontend. Pair devices by
   enabling "Permit join" in the frontend. The network key is generated on
-  first start and stored in ./volumes/data/secret.yaml - back it up.
+  first start and written into configuration.yaml (in this stack's
+  directory) - back that file up, losing it means re-pairing every device.
 
   If your adapter needs a specific driver (e.g. ConBee/deCONZ or EZSP),
   add "adapter: ember" (or "zstack"/"deconz") under "serial:" in

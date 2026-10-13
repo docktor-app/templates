@@ -6,6 +6,12 @@ services:
       - "${OLLAMA_PORT}:11434"
     volumes:
       - ./volumes/ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:v0.12.0
@@ -19,4 +25,5 @@ services:
     volumes:
       - ./volumes/open-webui:/app/backend/data
     depends_on:
-      - ollama
+      ollama:
+        condition: service_healthy

@@ -12,6 +12,12 @@ usage: |
   URL, so use only URL-safe characters (letters, digits, - and _). Changing
   it later does not update an already-initialised database.
 
-  Set ADMIN_TOKEN in .env to enable the /admin panel (leave empty to keep it
-  disabled). After creating your accounts, set SIGNUPS_ALLOWED=false and
-  redeploy. Back up ./volumes/postgres and ./volumes/data (attachments, keys).
+  Set ADMIN_TOKEN in .env to enable the /admin panel (leave it empty to keep
+  the panel disabled). Prefer an Argon2 hash over plain text, which logs a
+  warning: generate one with
+  `docker run --rm -it vaultwarden/server:1.37.4 /vaultwarden hash` and put
+  it in .env wrapped in single quotes, e.g. ADMIN_TOKEN='$argon2id$...'.
+  After creating your accounts, set SIGNUPS_ALLOWED=false and redeploy to
+  stop public sign-ups.
+
+  Back up ./volumes/postgres and ./volumes/data (attachments, keys).

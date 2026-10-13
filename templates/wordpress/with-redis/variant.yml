@@ -1,7 +1,7 @@
 name: With Redis
 description: Adds a Redis container for the WordPress persistent object cache
 usage: |
-  Before deploying, replace the database passwords in .env. Generate strong
+  Before deploying, replace the database passwords and REDIS_PASSWORD in .env. Generate strong
   values with:
     openssl rand -hex 24
 
@@ -9,7 +9,7 @@ usage: |
   install wizard.
 
   The redis service is reachable from WordPress as host "redis" (port 6379)
-  and WP_REDIS_HOST is already defined for you. To actually use it, install
+  and WP_REDIS_HOST / WP_REDIS_PASSWORD are already defined for you. To actually use it, install
   and activate the "Redis Object Cache" plugin from Plugins > Add New, then
   click "Enable Object Cache" in Settings > Redis.
 

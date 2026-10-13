@@ -9,5 +9,9 @@ services:
       - TZ=${TZ}
       - ALLOW_SIGNUP=${ALLOW_SIGNUP}
     env_file: .env
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
     volumes:
       - ./volumes/data:/app/data

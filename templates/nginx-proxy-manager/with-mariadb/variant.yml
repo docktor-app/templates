@@ -14,5 +14,6 @@ usage: |
   and reachable from the internet if you want Let's Encrypt HTTP challenges
   to work. Do not expose the admin port publicly.
 
-  The first start can log database connection errors for a few seconds while
-  MariaDB initializes; Nginx Proxy Manager retries until it is ready.
+  Nginx Proxy Manager waits for the MariaDB healthcheck to pass before it
+  starts. The first start can take a minute or two while the database and
+  the admin account are initialized.

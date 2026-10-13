@@ -13,3 +13,7 @@ usage: |
   Port 22000 (TCP/UDP) is the sync protocol; 21027/udp is local network
   discovery. To pair with devices outside your LAN, forward the sync port
   on your router or rely on Syncthing's relay servers.
+
+  In Docker's bridge network, LAN discovery can't see your real network, so
+  local devices may connect slowly via relays. Upstream recommends the
+  host-network variant on Linux hosts for the best results.

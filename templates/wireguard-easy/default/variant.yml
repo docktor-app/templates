@@ -2,11 +2,13 @@ name: Default
 description: wg-easy WireGuard VPN server with its web UI, set up automatically from .env
 usage: |
   Before deploying, set WG_HOST in .env to the public hostname or IP address
-  clients will connect to, and change WG_ADMIN_PASSWORD (it must be at least
-  12 characters with upper and lower case letters, a digit and a special
-  character). The admin user and password are applied only on the very first
-  start, while wg-easy has no configuration yet; later changes are made in
-  the web UI.
+  clients will connect to, and change WG_ADMIN_PASSWORD to a long, unique
+  password (the UI enforces a strong password, at least 12 characters with
+  upper and lower case letters, a digit and a special character, when it is
+  changed later). The admin user and password are applied only on the very
+  first start, while wg-easy has no configuration yet; later changes are made
+  in the web UI. Afterwards you can remove WG_ADMIN_PASSWORD from .env and the
+  INIT_* lines from docker-compose.yml so the password is not left on disk.
 
   Open the UI port (WG_UI_PORT, default 51821) in your browser, log in, and
   create clients; scan the QR code with the WireGuard app or download the
@@ -14,7 +16,9 @@ usage: |
   to this host.
 
   This container needs the NET_ADMIN and SYS_MODULE capabilities and the
-  net.ipv4.ip_forward / src_valid_mark sysctls to create the WireGuard
+  net.ipv4.ip_forward / src_valid_mark sysctls (plus the IPv6 sysctls and the
+  dual-stack "wg" network from the upstream compose file, which wg-easy 15
+  expects for its IPv6 firewall rules) to create the WireGuard
   interface and route traffic. It is not privileged and does not mount the
   Docker socket.
 

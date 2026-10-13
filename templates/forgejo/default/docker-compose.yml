@@ -1,6 +1,6 @@
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:16.0.5
+    image: codeberg.org/forgejo/forgejo:16.0.6
     restart: unless-stopped
     environment:
       - USER_UID=1000
@@ -17,3 +17,9 @@ services:
       - "${FORGEJO_SSH_PORT}:22"
     volumes:
       - ./volumes/data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3000/api/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s

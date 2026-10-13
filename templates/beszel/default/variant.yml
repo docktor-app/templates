@@ -1,7 +1,8 @@
 name: Default
 description: The Beszel hub (web UI and database), agents are added separately
 usage: |
-  This stack runs the Beszel hub only. Open the published port and create
+  This stack runs the Beszel hub only. Set BESZEL_APP_URL in .env to the
+  address you open the hub with, then open the published port and create
   the admin account on first visit.
 
   To monitor a server, install an agent on it:
